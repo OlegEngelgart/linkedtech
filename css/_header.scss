@@ -1,0 +1,227 @@
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #5e5373;
+    z-index: 2;
+  }
+
+  &__body {
+    // вытаскиваем контент на верх шапки
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 40px;
+    height: 90px;
+  }
+
+  &__logos {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    position: relative;
+    z-index: 3;
+  }
+  &__logo {
+    overflow: hidden;
+    img {
+      min-width: 100%;
+    }
+  }
+
+  &__logo-image {
+    flex: 0 1 40px;
+    img {
+      height: 40px;
+    }
+  }
+  &__logo-word {
+    flex: 1 0 85px;
+    height: 10px;
+    img {
+      height: 10px;
+    }
+  }
+  // ==================================================
+
+  &__burger {
+    // скрываем на разрешениях выше 767px
+    display: none;
+  }
+
+  &__menu {
+  }
+
+  &__list {
+    display: flex;
+    position: relative;
+    column-gap: 40px;
+    z-index: 2;
+  }
+
+  &__item {
+    // list-style: none; отключен в обнуляющих стилях
+    // margin: 0px 0px 0px 20px;
+  }
+
+  &__link {
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 18px;
+    // text-decoration: none; отключен в обнуляющих стилях
+  }
+
+  &__icons {
+    // width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    column-gap: 30px;
+    position: relative;
+    top: 0;
+    // left: -27.5px;
+    // padding: 0px 0px 0px 10px;
+    margin: 0px 5px 0px 0px;
+  }
+
+  &__icon {
+    flex: 1 0 20px;
+    min-height: 20px;
+    z-index: 3;
+
+    img {
+      max-width: 100%;
+      // width: 22px;
+      height: 20px;
+      display: block;
+      object-fit: cover;
+    }
+
+    &-user::before {
+      content: "";
+      display: flex;
+      width: 35px;
+      height: 35px;
+      background: #dee3e6 center / 35px 35px no-repeat;
+      border-radius: 50%;
+      position: absolute;
+      top: -30%;
+      right: -6px;
+      z-index: -1;
+    }
+  }
+  &__cart {
+  }
+}
+
+// ==================================================
+@media (max-width: 991.98px) {
+  body.lock {
+    // отключаем скрол под меню
+    overflow: hidden;
+  }
+  .header {
+    &__body {
+      height: 60px;
+    }
+    &__logo {
+      // flex: 0 0 40px;
+    }
+    &__burger {
+      // показываем бургер
+      display: block;
+      position: relative;
+      width: 30px;
+      height: 20px;
+
+      position: relative;
+      z-index: 3;
+    }
+    &__burger span {
+      position: absolute;
+      background-color: #fff;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      top: 9px;
+      transition: all 0.3s ease 0s;
+    }
+    &__burger::before,
+    &__burger::after {
+      // общие стили
+      content: "";
+      background-color: #fff;
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      left: 0;
+      transition: all 0.3s ease 0s;
+    }
+    &__burger::before {
+      top: 0;
+    }
+    &__burger::after {
+      bottom: 0;
+    }
+    // добавляем класс active и делаем крестик
+    &__burger.active::before {
+      transform: rotate(45deg);
+      top: 9px;
+    }
+    &__burger.active::after {
+      transform: rotate(-45deg);
+      bottom: 9px;
+    }
+    &__burger.active span {
+      transform: scale(0);
+    }
+
+    &__menu {
+      position: fixed;
+      // скрываем меню изначально
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #18b5a4;
+
+      // задаем padding на мобильном устройстве
+      padding: 70px 10px 20px 10px;
+      transition: all 0.3s ease 0s;
+
+      // даем возможность меню скроллиться
+      overflow: auto;
+    }
+    &__menu.active {
+      top: 0;
+    }
+
+    &__list {
+      display: block;
+    }
+    &__list li {
+      // list-style: none; отключен в обнуляющих стилях
+      margin: 0px 0px 20px 10px;
+    }
+    &__link {
+      font-size: 24px;
+    }
+    &__icons {
+    }
+    &__icon {
+      &-user::before {
+        right: 52px;
+      }
+    }
+  }
+}
